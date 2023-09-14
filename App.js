@@ -3,7 +3,7 @@ import { View, Button, Alert } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 import * as MediaLibrary from 'expo-media-library';
 import * as Permissions from 'expo-permissions'; // Import the Permissions module
-import Heart from './Heart';
+import Heart from './components/Heart';
 
 export default function App() {
   const heartRef = useRef(null);
