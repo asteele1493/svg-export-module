@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 
-const TestView = () => {
+const Heart = () => {
   return (
     <View>
       <Svg width="100" height="100" viewBox="0 0 24 24">
@@ -15,4 +15,4 @@ const TestView = () => {
   );
 };
 
-export default TestView;
+export default Heart;
