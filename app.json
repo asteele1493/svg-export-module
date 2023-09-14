@@ -1,5 +1,15 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow StencilShaper to access your photos.",
+          "savePhotosPermission": "Allow StencilShaper to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
     "name": "svg-export-module",
     "slug": "svg-export-module",
     "version": "1.0.0",
