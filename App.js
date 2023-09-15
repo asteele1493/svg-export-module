@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { View, Button, Alert } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 import * as MediaLibrary from 'expo-media-library';
-import * as Permissions from 'expo-permissions'; // Import the Permissions module
+import * as Permissions from 'expo-permissions'; 
 import Heart from './components/Heart';
 
 export default function App() {
