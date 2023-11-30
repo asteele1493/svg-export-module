@@ -1,13 +1,20 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Button, Alert } from 'react-native';
+import { View, Button, Alert, PixelRatio, ScrollView } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 import * as MediaLibrary from 'expo-media-library';
 import * as Permissions from 'expo-permissions'; 
 import Heart from './components/Heart';
+import ImageImport from './components/Import';
 
 export default function App() {
   const heartRef = useRef(null);
   const [mediaLibraryPermission, setMediaLibraryPermission] = useState(null);
+  let uri = 'None';
+
+  const targetPixelCount = 1080; // If you want full HD pictures
+  const pixelRatio = PixelRatio.get(); // The pixel ratio of the device
+  // pixels * pixelratio = targetPixelCount, so pixels = targetPixelCount / pixelRatio
+  const pixels = targetPixelCount / pixelRatio;
 
   useEffect(() => {
     // Check and request permissions when the component mounts
@@ -34,13 +41,20 @@ export default function App() {
       }
 
       // Capture the Heart component as an image
-      const uri = await captureRef(heartRef, {
+      uri = await captureRef(heartRef, {
         format: 'png',
+        // result: 'base64',
         quality: 1,
+        height: pixels,
+        width: pixels,
       });
+      console.log(uri)
 
       // Save the captured image to the device's media library (camera roll)
+      // Or FileSystem library could be implemented here using FileSystem.makeDirectoryAsync()
       const asset = await MediaLibrary.createAssetAsync(uri);
+      console.log(asset)
+
       await MediaLibrary.createAlbumAsync('HeartScreenshots', asset, false);
 
       console.log(`Screenshot saved in the camera roll`);
@@ -51,11 +65,14 @@ export default function App() {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <ScrollView style={{ flex: 1 }}>
+    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       <View ref={heartRef}>
         <Heart />
       </View>
       <Button title="Take Screenshot" onPress={handleScreenshot} />
+      <ImageImport/>
     </View>
+  </ScrollView>  
   );
 }
